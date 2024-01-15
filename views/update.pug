@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+  head
+    title Actualizar formulario de objeto personalizado | Integración con HubSpot I Práctica
+  body
+    h1 #{title}
+    form(action='/update-cobj' method='post')
+      label Name:
+      input(type='text' name='name' required)
+      br
+      label Publisher:
+      input(type='text' name='publisher' required)
+      br
+      label Price:
+      input(type='number' name='price' required)
+      br
+      input(type='submit' value='Actualizar')

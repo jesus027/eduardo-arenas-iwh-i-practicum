@@ -1,11 +1,65 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const axios = require('axios');
-const app = express();
 
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
+// Routes
+app.get('/', homepage);
+app.get('/update-cobj', updateForm);
+app.post('/update-cobj', updateCObj);
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+async function homepage(req, res) {
+    try {
+        const response = await axios.get('https://api.hubapi.com/crm/v1/objects/custom', {
+        headers: {
+            'Authorization': 'Bearer pat-na1-94dee70f-a8ba-4eee-9f37-8c9835729414',
+        },
+        });
+
+        res.render('index', { customObjects: response.data.results });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching custom objects');
+    }
+}
+
+function updateForm(req, res) {
+    res.render('update', { title: 'Actualizar formulario de objeto personalizado | Integración con HubSpot I Práctica' });
+}
+
+async function updateCObj(req, res) {
+    const { name, publisher, price } = req.body;
+
+    try {
+        const response = await axios.post('https://api.hubapi.com/crm/v1/objects/custom', {
+        properties: {
+            name: { value: name },
+            publisher: { value: publisher },
+            price: { value: price },
+        },
+        }, {
+        headers: {
+            'Authorization': 'Bearer pat-na1-94dee70f-a8ba-4eee-9f37-8c9835729414',
+            'Content-Type': 'application/json',
+        },
+    });
+
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error creating custom object');
+    }
+}
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = '';
@@ -68,4 +122,3 @@ app.post('/update', async (req, res) => {
 
 
 // * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));

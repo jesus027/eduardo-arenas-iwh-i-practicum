@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+  head
+    title HubSpot Custom Objects
+  body
+    h1 Custom Object Table
+    a(href='/update-cobj') Volver a la página de inicio
+    table
+      tr
+        th Name
+        th Publisher
+        th Price
+      each obj in customObjects
+        tr
+          td #{obj.properties.name.value}
+          td #{obj.properties.publisher.value}
+          td #{obj.properties.price.value}
