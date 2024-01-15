@@ -20,9 +20,9 @@ app.listen(PORT, () => {
 
 async function homepage(req, res) {
     try {
-        const response = await axios.get('https://api.hubapi.com/crm/v1/objects/custom', {
+        const response = await axios.get('https://api.hubapi.com/crm/v1/objects/custom-object-name', {
         headers: {
-            'Authorization': 'Bearer ',
+            'Authorization': 'Bearer pat-na1-94dee70f-a8ba-4eee-9f37-8c9835729414',
         },
         });
 
@@ -41,7 +41,7 @@ async function updateCObj(req, res) {
     const { name, publisher, price } = req.body;
 
     try {
-        const response = await axios.post('https://api.hubapi.com/crm/v1/objects/custom', {
+        const response = await axios.post('https://api.hubapi.com/crm/v1/objects/custom-object-name', {
         properties: {
             name: { value: name },
             publisher: { value: publisher },
@@ -49,7 +49,7 @@ async function updateCObj(req, res) {
         },
         }, {
         headers: {
-            'Authorization': 'Bearer',
+            'Authorization': 'Bearer pat-na1-94dee70f-a8ba-4eee-9f37-8c9835729414',
             'Content-Type': 'application/json',
         },
     });
