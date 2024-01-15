@@ -22,7 +22,7 @@ async function homepage(req, res) {
     try {
         const response = await axios.get('https://api.hubapi.com/crm/v1/objects/custom', {
         headers: {
-            'Authorization': 'Bearer pat-na1-94dee70f-a8ba-4eee-9f37-8c9835729414',
+            'Authorization': 'Bearer ',
         },
         });
 
@@ -49,7 +49,7 @@ async function updateCObj(req, res) {
         },
         }, {
         headers: {
-            'Authorization': 'Bearer APPI_KEY',
+            'Authorization': 'Bearer',
             'Content-Type': 'application/json',
         },
     });
