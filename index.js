@@ -49,7 +49,7 @@ async function updateCObj(req, res) {
         },
         }, {
         headers: {
-            'Authorization': 'Bearer pat-na1-94dee70f-a8ba-4eee-9f37-8c9835729414',
+            'Authorization': 'Bearer APPI_KEY',
             'Content-Type': 'application/json',
         },
     });
